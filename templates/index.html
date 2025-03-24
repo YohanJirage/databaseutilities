@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Backup & Restore Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Database Backup & Restore Dashboard</h1>
+
+        <div class="action-selection">
+            <button id="backupBtn">Backup Database</button>
+            <button id="restoreBtn">Restore Database</button>
+            <a href="/logs"><button>View Backup/Restore Logs</button></a>
+        </div>
+
+        <!-- Backup Form -->
+        <form id="backupForm" action="/backup" method="POST" style="display: none;">
+            <h2>Backup Database</h2>
+
+            <label for="dbType">Database Type:</label>
+            <select id="dbType" name="dbType" required>
+                <option value="postgres">PostgreSQL</option>
+                <option value="mysql">MySQL</option>
+            </select>
+
+            <label for="dbHost">Database Host:</label>
+            <input type="text" id="dbHost" name="dbHost" required placeholder="Enter database host (e.g., localhost)">
+
+            <label for="dbUsername">Database Name:</label>
+            <input type="text" id="databasename" name="databasename" required placeholder="Enter database name">
+
+            <label for="dbPort">Database Port:</label>
+            <input type="number" id="dbPort" name="dbPort" required placeholder="Enter database port (e.g., 5432)">
+
+            <label for="dbUsername">Database Username:</label>
+            <input type="text" id="dbUsername" name="dbUsername" required placeholder="Enter database username">
+            
+
+            <label for="dbPassword">Database Password:</label>
+            <input type="password" id="dbPassword" name="dbPassword" required placeholder="Enter database password">
+
+            <label for="backupFile">Backup File Path:</label>
+            <input type="text" id="backupFile" name="backupFile" required placeholder="Enter file path for backup (e.g., /path/to/backup.sql)">
+            
+            <label for="tables">Select Tables (Optional):</label>
+            <input type="text" id="tables" name="tables" placeholder="Comma-separated table names (e.g., table1, table2)">
+
+            <button type="submit">Backup Now</button>
+        </form>
+
+        <!-- Restore Form -->
+        <form id="restoreForm" action="/restore" method="POST" style="display: none;">
+            <h2>Restore Database</h2>
+
+            <label for="dbType">Database Type:</label>
+            <select id="dbType" name="dbType" required>
+                <option value="postgres">PostgreSQL</option>
+                <option value="mysql">MySQL</option>
+            </select>
+
+            <label for="dbHost">Database Host:</label>
+            <input type="text" id="dbHost" name="dbHost" required placeholder="Enter database host (e.g., localhost)">
+
+            <label for="dbPort">Database Port:</label>
+            <input type="number" id="dbPort" name="dbPort" required placeholder="Enter database port (e.g., 3306 for MySQL)">
+
+            <label for="dbUsername">Database Username:</label>
+            <input type="text" id="dbUsername" name="dbUsername" required placeholder="Enter database username">
+
+            <label for="dbPassword">Database Password:</label>
+            <input type="password" id="dbPassword" name="dbPassword" required placeholder="Enter database password">
+
+            <label for="restoreFile">Restore File Path:</label>
+            <input type="text" id="restoreFile" name="restoreFile" required placeholder="Enter file path for restore (e.g., /path/to/restore.sql)">
+            
+            <label for="restoreDate">Restore to Specific Date (Optional):</label>
+            <input type="date" id="restoreDate" name="restoreDate">
+
+            <button type="submit">Restore Now</button>
+        </form>
+    </div>
+
+    <script>
+        // Toggle between Backup and Restore forms
+        const backupBtn = document.getElementById('backupBtn');
+        const restoreBtn = document.getElementById('restoreBtn');
+        const backupForm = document.getElementById('backupForm');
+        const restoreForm = document.getElementById('restoreForm');
+
+        backupBtn.addEventListener('click', () => {
+            backupForm.style.display = 'block';
+            restoreForm.style.display = 'none';
+        });
+
+        restoreBtn.addEventListener('click', () => {
+            restoreForm.style.display = 'block';
+            backupForm.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

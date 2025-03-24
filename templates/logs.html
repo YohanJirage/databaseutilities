@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Backup and Restore Logs</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Backup and Restore Logs</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Action</th>
+            <th>File Path</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+        {{range .}}
+        <tr>
+            <td>{{.ID}}</td>
+            <td>{{.Action}}</td>
+            <td>{{.FilePath}}</td>
+            <td>{{.Date}}</td>
+            <td>{{.Status}}</td>
+        </tr>
+        {{end}}
+    </table>
+    <a href="/">Back to Home</a>
+</body>
+</html>
